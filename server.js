@@ -16,21 +16,25 @@ dotenv.config()
 //databse config
 connectDB()
 
+let BACKEND_URL = ""
+if (process.env.DEV_MODE === "development") {
+    BACKEND_URL = process.env.DEV_URL
+} else if (process.env.DEV_MODE === "production") {
+    BACKEND_URL = process.env.PROD_URL
+}
+
 //Swagger api config
 const options = {
     definition: {
         openapi: "3.0.0",
         info: {
             title: "Expense Tracker Application",
-            description: "Nodejs Express Job Portal Application"
+            description: "Nodejs Express Expense Tracker Application"
         },
         servers: [
             {
-                url: "https://expense-tracker-app-lla1.onrender.com"
+                url: BACKEND_URL
             },
-            {
-                url: "http://localhost:8081"
-            }
         ]
     },
     apis: [
